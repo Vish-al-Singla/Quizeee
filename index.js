@@ -8,19 +8,19 @@ console.log("Let's Begin the Game!\n");
 console.log(chalk.yellowBright.bold("*********************\n"));
 function quiz(Question,options,Answer)
 {  
-  console.log(Question);
+  console.log(Question,"\n");
   var userAnswer=readlineSync.question(chalk.bold.rgb(51,51,255)(options));
   if(userAnswer.toUpperCase()===Answer.toUpperCase())
   { score=score+1;
-    console.log(chalk.rgb(0,255,0)("Correct Answer!"));
+    console.log(chalk.rgb(0,255,0)("\nCorrect Answer!"));
   }
   else
   {
-    console.log(chalk.rgb(255,0,0)("Wrong Answer!"));
+    console.log(chalk.rgb(255,0,0)("\nWrong Answer!"));
     console.log(chalk.rgb(0,255,0)("Right answer is : ",Answer));
 
   }
-   console.log(chalk.bold.rgb(128,0,128)("-------------------------"));
+   console.log(chalk.bold.rgb(51,51,255)("\n-------------------------\n"));
 }
 var Questions= [{
   question: "1. Where do I live?",
@@ -74,20 +74,46 @@ var Questions= [{
 }
 ]
 
+// Data of High Scores
+
+var highScores=[
+{
+  name:"Vishal",
+  score:10,
+},
+{
+  name:"Rishav",
+  score:9,
+}
+]
+
 for(var i=0;i<Questions.length;i++)
 {
   var currentQuestion = Questions[i];
   quiz(currentQuestion.question,currentQuestion.options,currentQuestion.answer)
 }
-console.log(chalk.rgb(128,0,128)("-------------------------"));
 if(score<=4)
 {
-  console.log(chalk.bold.redBright("Nice Played\n You scored: ",score));
+  console.log(chalk.bold.redBright("I am Hurt :("),"\nYou scored: ",score);
 }
-else if(score>=5 && score<=7 )
+else if(score>=5 && score<=8 ||score==9)
 {
-  console.log(chalk.bold.yellowBright("Yay!! Well Played\n You scored: ", score));
+  console.log(chalk.bold.yellowBright("Well Played\nYou scored: ", score));
 }
-else{
-  console.log(chalk.green("Hurray!!\n You Scored: ",score));
+else
+{
+  for(var i=0;i<highScores.length;i++)
+{
+  var currentPlayer = highScores[i];
+  if(score>currentPlayer.score)
+{
+  console.log(chalk.bold.rgb(102,255,255)("Hey! You have beaten the highscore!"));
+  console.log("Send me Screen Shot so that I can Update the High Scores list !!\n");
+  for(var i=0;i<highScores.length;i++)
+{
+  var currentPlayer = highScores[i];
+  console.log("Name: ",currentPlayer.name,"\nScored: ",currentPlayer.score);
+}
+}
+}
 }
